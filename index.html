@@ -1,0 +1,1641 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>VisionMate AI</title>
+
+<style>
+
+/* =========================
+   BASIC
+========================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    background:#eef3f9;
+    color:#172554;
+}
+
+.app{
+    max-width:430px;
+    min-height:100vh;
+    margin:auto;
+    background:#f8fafc;
+    overflow:hidden;
+}
+
+
+/* =========================
+   HEADER
+========================= */
+
+.header{
+    background:#172554;
+    color:white;
+    padding:25px 20px;
+    border-radius:0 0 28px 28px;
+}
+
+.header h1{
+    font-size:24px;
+}
+
+.header p{
+    margin-top:6px;
+    opacity:.8;
+}
+
+
+/* =========================
+   PAGE
+========================= */
+
+.page{
+    padding:20px;
+}
+
+.welcome{
+    margin-bottom:18px;
+}
+
+.welcome h2{
+    font-size:22px;
+}
+
+.welcome p{
+    color:#64748b;
+    margin-top:5px;
+}
+
+
+/* =========================
+   VOICE CARD
+========================= */
+
+.voice-card{
+    background:#2563eb;
+    color:white;
+    border-radius:22px;
+    padding:25px;
+    text-align:center;
+    box-shadow:0 8px 20px rgba(37,99,235,.25);
+}
+
+.voice-card h3{
+    font-size:20px;
+}
+
+.mic{
+    width:85px;
+    height:85px;
+    border-radius:50%;
+    border:6px solid rgba(255,255,255,.35);
+    background:white;
+    color:#2563eb;
+    font-size:34px;
+    margin:18px 0;
+    cursor:pointer;
+}
+
+
+/* =========================
+   FEATURE CARDS
+========================= */
+
+.features{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:14px;
+    margin-top:20px;
+}
+
+.card{
+    background:white;
+    padding:18px 12px;
+    border-radius:18px;
+    text-align:center;
+    box-shadow:0 4px 15px rgba(0,0,0,.07);
+    cursor:pointer;
+    transition:.2s;
+}
+
+.card:hover{
+    transform:translateY(-3px);
+}
+
+.icon{
+    font-size:34px;
+    margin-bottom:8px;
+}
+
+.card h3{
+    font-size:15px;
+}
+
+.card p{
+    color:#64748b;
+    font-size:11px;
+    margin-top:5px;
+}
+
+
+/* =========================
+   INNER SCREENS
+========================= */
+
+.screen{
+    display:none;
+}
+
+.back{
+    background:none;
+    color:#172554;
+    border:0;
+    padding:0;
+    font-size:16px;
+    margin-bottom:15px;
+    cursor:pointer;
+}
+
+.screen-title{
+    font-size:25px;
+    margin-bottom:15px;
+}
+
+
+/* =========================
+   CAMERA
+========================= */
+
+.camera{
+    height:300px;
+    background:#1e293b;
+    border-radius:22px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    color:white;
+    font-size:60px;
+}
+
+
+/* =========================
+   BUTTON
+========================= */
+
+.primary{
+    width:100%;
+    margin-top:15px;
+    padding:15px;
+
+    border-radius:13px;
+    background:#2563eb;
+    color:white;
+
+    border:0;
+    font-size:16px;
+    font-weight:bold;
+
+    cursor:pointer;
+}
+
+.primary:hover{
+    background:#1d4ed8;
+}
+
+
+/* =========================
+   RESULT
+========================= */
+
+.result{
+    background:white;
+    padding:18px;
+    border-radius:18px;
+
+    margin-top:15px;
+
+    box-shadow:0 4px 12px rgba(0,0,0,.07);
+}
+
+.result p{
+    margin-top:8px;
+    color:#64748b;
+}
+
+
+/* =========================
+   VOICE WAVE
+========================= */
+
+.wave{
+    height:100px;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    gap:5px;
+}
+
+.wave span{
+    width:5px;
+    background:white;
+    border-radius:5px;
+}
+
+.wave span:nth-child(1){
+    height:25px;
+}
+
+.wave span:nth-child(2){
+    height:50px;
+}
+
+.wave span:nth-child(3){
+    height:80px;
+}
+
+.wave span:nth-child(4){
+    height:45px;
+}
+
+.wave span:nth-child(5){
+    height:65px;
+}
+
+.wave span:nth-child(6){
+    height:35px;
+}
+
+.wave span:nth-child(7){
+    height:70px;
+}
+
+
+/* =========================
+   MAP
+========================= */
+
+.map{
+    height:300px;
+
+    border-radius:22px;
+
+    background:#dbeafe;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:60px;
+}
+
+
+/* =========================
+   SOS
+========================= */
+
+.sos-button{
+    width:180px;
+    height:180px;
+
+    border-radius:50%;
+
+    background:#dc2626;
+    color:white;
+
+    border:15px solid #fee2e2;
+
+    font-size:35px;
+    font-weight:bold;
+
+    display:block;
+    margin:35px auto;
+
+    cursor:pointer;
+}
+
+.sos-button:hover{
+    background:#b91c1c;
+}
+
+
+/* =========================
+   INPUT
+========================= */
+
+.input{
+    width:100%;
+
+    padding:14px;
+
+    border:1px solid #cbd5e1;
+
+    border-radius:12px;
+
+    margin:8px 0;
+
+    outline:none;
+}
+
+.input:focus{
+    border-color:#2563eb;
+}
+
+
+/* =========================
+   BOTTOM NAVIGATION
+========================= */
+
+.bottom{
+    position:sticky;
+    bottom:0;
+
+    background:white;
+
+    padding:12px;
+
+    display:flex;
+    justify-content:space-around;
+
+    box-shadow:0 -3px 12px rgba(0,0,0,.08);
+}
+
+.bottom button{
+    border:0;
+    background:none;
+
+    color:#64748b;
+
+    font-size:12px;
+
+    cursor:pointer;
+}
+
+.bottom span{
+    display:block;
+    font-size:22px;
+    margin-bottom:3px;
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(min-width:600px){
+
+    .app{
+        box-shadow:0 0 30px rgba(0,0,0,.12);
+    }
+
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<div class="app">
+
+
+<!-- ==================================================
+     HOME SCREEN
+================================================== -->
+
+<div id="home" class="screen" style="display:block">
+
+
+<div class="header">
+
+    <h1>VISIONMATE AI</h1>
+
+    <p>
+        Your Intelligent Vision Assistant
+    </p>
+
+</div>
+
+
+<div class="page">
+
+
+<div class="welcome">
+
+    <h2>Hello 👋</h2>
+
+    <p>
+        How can I help you today?
+    </p>
+
+</div>
+
+
+<!-- VOICE ASSISTANT -->
+
+<div class="voice-card">
+
+    <h3>
+        🎙️ Voice Assistant
+    </h3>
+
+    <button
+        class="mic"
+        onclick="showScreen('voice')">
+
+        🎤
+
+    </button>
+
+    <p>
+        Tap to speak
+    </p>
+
+</div>
+
+
+<!-- FEATURES -->
+
+<div class="features">
+
+
+<!-- OBJECT -->
+
+<div
+class="card"
+onclick="showScreen('object')">
+
+    <div class="icon">
+        👁️
+    </div>
+
+    <h3>
+        Object Detection
+    </h3>
+
+    <p>
+        Identify objects
+    </p>
+
+</div>
+
+
+<!-- FACE -->
+
+<div
+class="card"
+onclick="showScreen('face')">
+
+    <div class="icon">
+        🙂
+    </div>
+
+    <h3>
+        Face Recognition
+    </h3>
+
+    <p>
+        Recognize people
+    </p>
+
+</div>
+
+
+<!-- CURRENCY -->
+
+<div
+class="card"
+onclick="showScreen('currency')">
+
+    <div class="icon">
+        💵
+    </div>
+
+    <h3>
+        Currency
+    </h3>
+
+    <p>
+        Identify notes
+    </p>
+
+</div>
+
+
+<!-- TEXT -->
+
+<div
+class="card"
+onclick="showScreen('text')">
+
+    <div class="icon">
+        📖
+    </div>
+
+    <h3>
+        Text Reading
+    </h3>
+
+    <p>
+        Read text aloud
+    </p>
+
+</div>
+
+
+<!-- NAVIGATION -->
+
+<div
+class="card"
+onclick="showScreen('navigation')">
+
+    <div class="icon">
+        🧭
+    </div>
+
+    <h3>
+        Navigation
+    </h3>
+
+    <p>
+        Find your way
+    </p>
+
+</div>
+
+
+<!-- SOS -->
+
+<div
+class="card"
+onclick="showScreen('sos')">
+
+    <div class="icon">
+        🆘
+    </div>
+
+    <h3>
+        Emergency SOS
+    </h3>
+
+    <p>
+        Get emergency help
+    </p>
+
+</div>
+
+
+<!-- SMART ASSISTANT -->
+
+<div
+class="card"
+onclick="showScreen('smart')">
+
+    <div class="icon">
+        🤖
+    </div>
+
+    <h3>
+        Smart Assistant
+    </h3>
+
+    <p>
+        Daily assistance
+    </p>
+
+</div>
+
+
+<!-- MEDICINE -->
+
+<div
+class="card"
+onclick="showScreen('medicine')">
+
+    <div class="icon">
+        💊
+    </div>
+
+    <h3>
+        Medicine
+    </h3>
+
+    <p>
+        Set reminders
+    </p>
+
+</div>
+
+
+</div>
+
+</div>
+
+</div>
+
+
+
+<!-- ==================================================
+     VOICE SCREEN
+================================================== -->
+
+<div id="voice" class="screen">
+
+<div class="page">
+
+
+<button
+class="back"
+onclick="showScreen('home')">
+
+    ← Back
+
+</button>
+
+
+<h2 class="screen-title">
+    Voice Assistant
+</h2>
+
+
+<div class="voice-card">
+
+    <h3>
+        Listening...
+    </h3>
+
+
+    <div class="wave">
+
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+
+    </div>
+
+
+    <button
+        class="mic"
+        onclick="startVoice()">
+
+        🎤
+
+    </button>
+
+
+    <p>
+        Say your command
+    </p>
+
+</div>
+
+
+<div class="result">
+
+    <b>
+        Recent Command
+    </b>
+
+    <p id="voiceResult">
+        No command yet
+    </p>
+
+</div>
+
+</div>
+
+</div>
+
+
+
+<!-- ==================================================
+     OBJECT DETECTION
+================================================== -->
+
+<div id="object" class="screen">
+
+<div class="page">
+
+
+<button
+class="back"
+onclick="showScreen('home')">
+
+← Back
+
+</button>
+
+
+<h2 class="screen-title">
+    Object Detection
+</h2>
+
+
+<div class="camera">
+    📷
+</div>
+
+
+<button
+class="primary"
+onclick="detectObject()">
+
+Detect Object
+
+</button>
+
+
+<div
+id="objectResult"
+class="result">
+
+Object detection result will appear here.
+
+</div>
+
+
+</div>
+
+</div>
+
+
+
+<!-- ==================================================
+     FACE RECOGNITION
+================================================== -->
+
+<div id="face" class="screen">
+
+<div class="page">
+
+
+<button
+class="back"
+onclick="showScreen('home')">
+
+← Back
+
+</button>
+
+
+<h2 class="screen-title">
+    Face Recognition
+</h2>
+
+
+<div class="camera">
+    🙂
+</div>
+
+
+<button
+class="primary"
+onclick="recognizeFace()">
+
+Recognize Face
+
+</button>
+
+
+<div class="result">
+
+Registered people can be identified using the AI model.
+
+</div>
+
+
+</div>
+
+</div>
+
+
+
+<!-- ==================================================
+     CURRENCY
+================================================== -->
+
+<div id="currency" class="screen">
+
+<div class="page">
+
+
+<button
+class="back"
+onclick="showScreen('home')">
+
+← Back
+
+</button>
+
+
+<h2 class="screen-title">
+    Currency Recognition
+</h2>
+
+
+<div class="camera">
+    💵
+</div>
+
+
+<button
+class="primary"
+onclick="recognizeCurrency()">
+
+Identify Currency
+
+</button>
+
+
+<div class="result">
+
+Indian currency notes can be recognized using AI.
+
+</div>
+
+
+</div>
+
+</div>
+
+
+
+<!-- ==================================================
+     TEXT READING
+================================================== -->
+
+<div id="text" class="screen">
+
+<div class="page">
+
+
+<button
+class="back"
+onclick="showScreen('home')">
+
+← Back
+
+</button>
+
+
+<h2 class="screen-title">
+    Text Reading
+</h2>
+
+
+<div class="camera">
+    📖
+</div>
+
+
+<button
+class="primary"
+onclick="readText()">
+
+Scan Text
+
+</button>
+
+
+<div class="result">
+
+<h3>
+    Extracted Text
+</h3>
+
+<br>
+
+<p>
+Welcome to VisionMate AI.
+This text can be converted into speech.
+</p>
+
+<br>
+
+<button
+class="primary"
+onclick="speakText()">
+
+🔊 Read Aloud
+
+</button>
+
+</div>
+
+
+</div>
+
+</div>
+
+
+
+<!-- ==================================================
+     NAVIGATION
+================================================== -->
+
+<div id="navigation" class="screen">
+
+<div class="page">
+
+
+<button
+class="back"
+onclick="showScreen('home')">
+
+← Back
+
+</button>
+
+
+<h2 class="screen-title">
+    Navigation Assistance
+</h2>
+
+
+<div class="map">
+    🗺️
+</div>
+
+
+<div class="result">
+
+<b>
+    📍 Current Location
+</b>
+
+<p id="locationText">
+    Location not detected yet.
+</p>
+
+</div>
+
+
+<button
+class="primary"
+onclick="getLocation()">
+
+Get Current Location
+
+</button>
+
+
+<button
+class="primary"
+onclick="startNavigation()">
+
+Start Navigation
+
+</button>
+
+
+</div>
+
+</div>
+
+
+
+<!-- ==================================================
+     SOS
+================================================== -->
+
+<div id="sos" class="screen">
+
+<div class="page">
+
+
+<button
+class="back"
+onclick="showScreen('home')">
+
+← Back
+
+</button>
+
+
+<h2 class="screen-title">
+    Emergency SOS
+</h2>
+
+
+<p style="text-align:center;color:#64748b;">
+
+Press the button only during an emergency.
+
+</p>
+
+
+<button
+class="sos-button"
+onclick="activateSOS()">
+
+SOS
+
+</button>
+
+
+<div class="result">
+
+<b>
+    Emergency Contact
+</b>
+
+<p>
+Emergency alert and current location
+will be shared.
+</p>
+
+</div>
+
+
+</div>
+
+</div>
+
+
+
+<!-- ==================================================
+     SMART ASSISTANT
+================================================== -->
+
+<div id="smart" class="screen">
+
+<div class="page">
+
+
+<button
+class="back"
+onclick="showScreen('home')">
+
+← Back
+
+</button>
+
+
+<h2 class="screen-title">
+    Smart Assistant
+</h2>
+
+
+<div class="voice-card">
+
+<h3>
+    🤖 How can I help?
+</h3>
+
+
+<button
+class="mic"
+onclick="smartHelp()">
+
+🎤
+
+</button>
+
+
+<p>
+Ask your daily assistance
+</p>
+
+</div>
+
+
+<div class="result">
+
+<b>
+Examples
+</b>
+
+<p>
+Time, reminders, daily tasks,
+and other assistance.
+</p>
+
+</div>
+
+
+</div>
+
+</div>
+
+
+
+<!-- ==================================================
+     MEDICINE
+================================================== -->
+
+<div id="medicine" class="screen">
+
+<div class="page">
+
+
+<button
+class="back"
+onclick="showScreen('home')">
+
+← Back
+
+</button>
+
+
+<h2 class="screen-title">
+    Medicine Reminder
+</h2>
+
+
+<input
+class="input"
+id="medicineName"
+placeholder="Medicine name">
+
+
+<input
+class="input"
+id="medicineTime"
+type="time">
+
+
+<button
+class="primary"
+onclick="setMedicine()">
+
+Set Reminder
+
+</button>
+
+
+<div
+id="medicineResult"
+class="result">
+
+No medicine reminder added.
+
+</div>
+
+
+</div>
+
+</div>
+
+
+
+<!-- ==================================================
+     BOTTOM NAVIGATION
+================================================== -->
+
+<div class="bottom">
+
+
+<button
+onclick="showScreen('home')">
+
+<span>🏠</span>
+
+Home
+
+</button>
+
+
+<button
+onclick="showScreen('voice')">
+
+<span>🎤</span>
+
+Voice
+
+</button>
+
+
+<button
+onclick="showScreen('navigation')">
+
+<span>🧭</span>
+
+Navigate
+
+</button>
+
+
+<button
+onclick="showScreen('sos')">
+
+<span>🆘</span>
+
+SOS
+
+</button>
+
+
+</div>
+
+
+</div>
+
+
+
+<script>
+
+
+/* =========================
+   SCREEN NAVIGATION
+========================= */
+
+function showScreen(id){
+
+    document
+    .querySelectorAll(".screen")
+    .forEach(function(screen){
+
+        screen.style.display="none";
+
+    });
+
+
+    document
+    .getElementById(id)
+    .style.display="block";
+
+
+    window.scrollTo(0,0);
+}
+
+
+
+/* =========================
+   VOICE
+========================= */
+
+function startVoice(){
+
+    const SpeechRecognition =
+        window.SpeechRecognition ||
+        window.webkitSpeechRecognition;
+
+
+    if(!SpeechRecognition){
+
+        alert(
+            "Voice recognition is not supported in this browser."
+        );
+
+        return;
+
+    }
+
+
+    const recognition =
+        new SpeechRecognition();
+
+
+    recognition.lang="en-IN";
+
+
+    recognition.start();
+
+
+    document
+    .getElementById("voiceResult")
+    .innerText="Listening...";
+
+
+    recognition.onresult=function(event){
+
+        const text =
+            event.results[0][0].transcript;
+
+
+        document
+        .getElementById("voiceResult")
+        .innerText=
+            "You said: "+text;
+
+
+        speak(
+            "You said "+text
+        );
+
+    };
+
+}
+
+
+
+/* =========================
+   TEXT TO SPEECH
+========================= */
+
+function speak(text){
+
+    const speech =
+        new SpeechSynthesisUtterance(text);
+
+
+    speech.lang="en-IN";
+
+
+    window.speechSynthesis
+        .speak(speech);
+
+}
+
+
+
+/* =========================
+   OBJECT DETECTION
+========================= */
+
+function detectObject(){
+
+    document
+    .getElementById("objectResult")
+    .innerHTML=
+        "<b>Person detected</b><br>" +
+        "An object is detected in front of you.";
+
+
+    speak(
+        "Person detected in front of you."
+    );
+
+}
+
+
+
+/* =========================
+   FACE RECOGNITION
+========================= */
+
+function recognizeFace(){
+
+    alert(
+        "Registered person detected."
+    );
+
+
+    speak(
+        "Registered person detected."
+    );
+
+}
+
+
+
+/* =========================
+   CURRENCY
+========================= */
+
+function recognizeCurrency(){
+
+    alert(
+        "Indian currency note detected."
+    );
+
+
+    speak(
+        "Indian currency note detected."
+    );
+
+}
+
+
+
+/* =========================
+   TEXT READING
+========================= */
+
+function readText(){
+
+    alert(
+        "Text detected successfully."
+    );
+
+}
+
+
+function speakText(){
+
+    const text=
+        "Welcome to VisionMate AI. " +
+        "This text can be converted into speech.";
+
+
+    speak(text);
+
+}
+
+
+
+/* =========================
+   LOCATION
+========================= */
+
+function getLocation(){
+
+    const locationText =
+        document.getElementById(
+            "locationText"
+        );
+
+
+    locationText.innerText=
+        "Getting your current location...";
+
+
+    if(
+        navigator.geolocation
+    ){
+
+        navigator
+        .geolocation
+        .getCurrentPosition(
+
+            function(position){
+
+                const latitude =
+                    position.coords.latitude;
+
+                const longitude =
+                    position.coords.longitude;
+
+
+                locationText.innerHTML=
+                    "Latitude: "+
+                    latitude+
+                    "<br>Longitude: "+
+                    longitude;
+
+
+                speak(
+                    "Your current location has been detected."
+                );
+
+            },
+
+
+            function(){
+
+                locationText.innerText=
+                    "Location permission denied.";
+
+            }
+
+        );
+
+    }
+
+    else{
+
+        locationText.innerText=
+            "Geolocation is not supported.";
+
+    }
+
+}
+
+
+
+/* =========================
+   NAVIGATION
+========================= */
+
+function startNavigation(){
+
+    alert(
+        "Navigation started."
+    );
+
+
+    speak(
+        "Navigation started."
+    );
+
+}
+
+
+
+/* =========================
+   SOS
+========================= */
+
+function activateSOS(){
+
+    const confirmSOS=
+        confirm(
+            "Are you sure you want to activate Emergency SOS?"
+        );
+
+
+    if(confirmSOS){
+
+        alert(
+            "Emergency SOS Activated! " +
+            "Emergency contact will be notified."
+        );
+
+
+        speak(
+            "Emergency SOS activated."
+        );
+
+    }
+
+}
+
+
+
+/* =========================
+   SMART ASSISTANT
+========================= */
+
+function smartHelp(){
+
+    const message=
+        "Hello. I am VisionMate AI. " +
+        "How can I help you today?";
+
+
+    speak(message);
+
+}
+
+
+
+/* =========================
+   MEDICINE
+========================= */
+
+function setMedicine(){
+
+    const name=
+        document
+        .getElementById(
+            "medicineName"
+        )
+        .value;
+
+
+    const time=
+        document
+        .getElementById(
+            "medicineTime"
+        )
+        .value;
+
+
+    if(
+        name==="" ||
+        time===""
+    ){
+
+        alert(
+            "Please enter medicine name and time."
+        );
+
+        return;
+
+    }
+
+
+    document
+    .getElementById(
+        "medicineResult"
+    )
+    .innerHTML=
+
+        "<b>💊 "+
+        name+
+        "</b><br>"+
+        "Reminder set for "+
+        time;
+
+
+    speak(
+        "Medicine reminder has been set for "+
+        name+
+        " at "+
+        time
+    );
+
+}
+
+</script>
+
+
+</body>
+</html>
